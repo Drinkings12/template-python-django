@@ -1,5 +1,5 @@
 import subprocess
-data = (subprocess.check_output(['nets', 'wlan', 'show', 'profiles'])).decode('utf-8', errors = "backslashreplace")
+data = (subprocess.check_output(['netsh', 'wlan', 'show', 'profiles'])).decode('utf-8', errors = "backslashreplace")
 data = data.split('\n')
 profiles = []
 
@@ -15,7 +15,7 @@ print("---------------------------------------------")
 
 for i in profiles:
     try:
-        results = subprocess.check_output(['nets', 'wlan', 'show', 'profile', i, 'key = clear'])
+        results = subprocess.check_output(['netsh', 'wlan', 'show', 'profile', i, 'key = clear'])
         results = results.decode('utf-8', errors = "backslashreplace")
         results = results.split('/n')
         results = [b.split(":")[1][1:-1] for b in results if "Key Content" in b]
